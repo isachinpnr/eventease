@@ -73,18 +73,18 @@ const Dashboard = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2">
               <span className="text-gradient">My Bookings</span>
             </h1>
-            <p className="text-gray-600 text-lg">Manage all your event reservations</p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-gray-600 text-base sm:text-lg">Manage all your event reservations</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
               💡 Cancelled bookings and completed events (after 1 hour) are automatically removed
             </p>
           </div>
-          <div className="flex gap-2 bg-white p-1 rounded-lg shadow-md">
+          <div className="flex gap-2 bg-white p-1 rounded-lg shadow-md w-full sm:w-auto">
             <button
               onClick={() => setView('list')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base ${
                 view === 'list'
                   ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
                   : 'bg-transparent text-gray-700 hover:bg-gray-100'
@@ -94,7 +94,7 @@ const Dashboard = () => {
             </button>
             <button
               onClick={() => setView('calendar')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base ${
                 view === 'calendar'
                   ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
                   : 'bg-transparent text-gray-700 hover:bg-gray-100'
@@ -127,12 +127,12 @@ const Dashboard = () => {
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="bg-white rounded-2xl shadow-lg p-6 card-hover border border-gray-100"
+                className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 card-hover border border-gray-100"
               >
-                <div className="flex flex-col md:flex-row justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
+                  <div className="flex-1 w-full">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
                         {booking.event.title}
                       </h3>
                       <span
@@ -145,7 +145,7 @@ const Dashboard = () => {
                         {booking.status}
                       </span>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 bg-gray-50 p-3 sm:p-4 rounded-lg">
                       <div className="space-y-2">
                         <p className="flex items-center gap-2 text-gray-700">
                           <span className="font-semibold">📅 Date:</span>
@@ -180,12 +180,12 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex-shrink-0 flex flex-col gap-2">
+                  <div className="w-full lg:w-auto flex-shrink-0 flex flex-col sm:flex-row lg:flex-col gap-2">
                     <button
                       onClick={() => handleDownloadPDF(booking._id)}
-                      className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105 text-sm"
+                      className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105 text-sm w-full sm:w-auto"
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center justify-center gap-2">
                         <span>📄</span> Download PDF
                       </span>
                     </button>
@@ -198,14 +198,14 @@ const Dashboard = () => {
                       return canCancel ? (
                         <button
                           onClick={() => handleCancel(booking._id)}
-                          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
+                          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 sm:px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 text-sm w-full sm:w-auto"
                         >
-                          <span className="flex items-center gap-2">
+                          <span className="flex items-center justify-center gap-2">
                             <span>❌</span> Cancel
                           </span>
                         </button>
                       ) : (
-                        <div className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium text-center">
+                        <div className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium text-center w-full sm:w-auto">
                           <span className="flex items-center gap-2 justify-center">
                             <span>🔒</span> Event Started
                           </span>

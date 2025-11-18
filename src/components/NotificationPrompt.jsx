@@ -75,7 +75,7 @@ const NotificationPrompt = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 max-w-sm bg-white rounded-2xl shadow-2xl border-2 border-blue-200 p-6 z-50 animate-slide-up">
+    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm bg-white rounded-2xl shadow-2xl border-2 border-blue-200 p-4 sm:p-6 z-50 animate-slide-up">
       <div className="flex items-start gap-3 mb-4">
         <div className="text-4xl">🔔</div>
         <div className="flex-1">

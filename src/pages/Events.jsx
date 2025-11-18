@@ -48,20 +48,20 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-12 px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
             <span className="text-gradient">Browse Events</span>
           </h1>
-          <p className="text-xl text-gray-600">Discover amazing events happening around you</p>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600">Discover amazing events happening around you</p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-6 rounded-2xl shadow-xl mb-8 border border-gray-100">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="text-2xl">🔍</span>
-            <h2 className="text-2xl font-bold text-gray-900">Filter Events</h2>
+        <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-xl mb-6 sm:mb-8 border border-gray-100">
+          <div className="flex items-center gap-2 mb-4 sm:mb-6">
+            <span className="text-xl sm:text-2xl">🔍</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Filter Events</h2>
           </div>
-          <div className="grid md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <label className="block text-gray-700 font-semibold mb-2 flex items-center gap-1">
                 <span>🏷️</span> Category
@@ -145,7 +145,7 @@ const Events = () => {
             <p className="text-gray-500">Try adjusting your filters</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {events.map((event) => (
               <div
                 key={event._id}

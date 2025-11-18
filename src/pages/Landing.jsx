@@ -8,17 +8,17 @@ const Landing = () => {
           <div className="mb-8 animate-bounce">
             <span className="text-7xl">🎉</span>
           </div>
-          <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-4">
             Welcome to EventEase
           </h1>
-          <p className="text-2xl text-gray-700 mb-4 font-medium">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-4 font-medium px-4">
             Your one-stop platform for discovering and booking amazing events
           </p>
-          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 mb-12 max-w-2xl mx-auto px-4">
             From concerts to webinars, find and reserve your spot with ease. 
             Experience seamless event management like never before.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap px-4">
             <Link
               to="/events"
               className="btn-primary text-lg px-8 py-4 flex items-center gap-2"
@@ -34,35 +34,35 @@ const Landing = () => {
           </div>
         </div>
 
-        <div className="mt-24 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
-            <div className="text-5xl mb-4">🎯</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="mt-16 sm:mt-20 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto px-4">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div className="text-4xl sm:text-5xl mb-4">🎯</div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
               Discover Events
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
               Browse through a wide variety of events including concerts,
               tech conferences, business workshops, and more. Find exactly what you're looking for.
             </p>
           </div>
           
-          <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
-            <div className="text-5xl mb-4">⚡</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div className="text-4xl sm:text-5xl mb-4">⚡</div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
               Easy Booking
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
               Book up to 2 seats per event with just a few clicks.
               Manage all your bookings in one place with our intuitive dashboard.
             </p>
           </div>
           
-          <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
-            <div className="text-5xl mb-4">📅</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
+            <div className="text-4xl sm:text-5xl mb-4">📅</div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
               Stay Organized
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
               View your bookings in list or calendar view.
               Cancel bookings anytime before the event starts with full flexibility.
             </p>

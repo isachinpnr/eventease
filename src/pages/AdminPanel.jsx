@@ -154,7 +154,7 @@ const AdminPanel = () => {
               </h2>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     Title *
@@ -318,32 +318,32 @@ const AdminPanel = () => {
         )}
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
-            <h2 className="text-3xl font-bold flex items-center gap-2">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 md:p-6">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
               <span>📋</span> All Events
             </h2>
-            <p className="text-blue-100 mt-1">Manage and monitor all your events</p>
+            <p className="text-blue-100 mt-1 text-sm md:text-base">Manage and monitor all your events</p>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Event ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Title
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Capacity
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Actions
                   </th>
                 </tr>
@@ -351,16 +351,16 @@ const AdminPanel = () => {
               <tbody className="divide-y divide-gray-200">
                 {events.map((event) => (
                   <tr key={event._id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">
                       {event.eventId}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium">
+                    <td className="px-3 sm:px-6 py-4 text-xs sm:text-sm font-medium">
                       {event.title}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">
                       {formatDate(event.date)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-2 py-1 rounded text-xs ${
                           event.status === 'Upcoming'
@@ -373,10 +373,10 @@ const AdminPanel = () => {
                         {event.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">
                       {event.bookedSeats} / {event.capacity}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm space-x-2">
                       <button
                         onClick={() => fetchAttendees(event._id)}
                         className="text-blue-600 hover:underline"

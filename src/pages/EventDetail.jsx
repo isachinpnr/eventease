@@ -109,13 +109,13 @@ const EventDetail = () => {
           <span>←</span> Back to Events
         </Link>
 
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
-          <div className="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
-            <div className="flex-1">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
+        <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 border border-gray-100">
+          <div className="flex flex-col md:flex-row justify-between items-start mb-6 md:mb-8 gap-4">
+            <div className="flex-1 w-full">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3">
                 {event.title}
               </h1>
-              <p className="text-gray-500 font-mono text-sm">Event ID: {event.eventId}</p>
+              <p className="text-gray-500 font-mono text-xs sm:text-sm">Event ID: {event.eventId}</p>
             </div>
             <span
               className={`status-badge ${
@@ -130,16 +130,16 @@ const EventDetail = () => {
             </span>
           </div>
 
-          <p className="text-gray-700 text-lg mb-8 leading-relaxed bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+          <p className="text-gray-700 text-base sm:text-lg mb-6 md:mb-8 leading-relaxed bg-gray-50 p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
             {event.description}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
-              <h3 className="font-bold text-xl text-gray-900 mb-4 flex items-center gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-xl border border-blue-100">
+              <h3 className="font-bold text-lg sm:text-xl text-gray-900 mb-4 flex items-center gap-2">
                 <span>📋</span> Event Details
               </h3>
-              <div className="space-y-3 text-gray-700">
+              <div className="space-y-2 sm:space-y-3 text-gray-700 text-sm sm:text-base">
                 <p className="flex items-center gap-2">
                   <span className="font-semibold">🏷️ Category:</span>
                   <span className="bg-white px-3 py-1 rounded-full text-sm">{event.category}</span>
@@ -169,11 +169,11 @@ const EventDetail = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
-              <h3 className="font-bold text-xl text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 sm:p-6 rounded-xl border border-green-100">
+              <h3 className="font-bold text-lg sm:text-xl text-gray-900 mb-4 flex items-center gap-2">
                 <span>💺</span> Availability
               </h3>
-              <div className="space-y-3 text-gray-700">
+              <div className="space-y-2 sm:space-y-3 text-gray-700 text-sm sm:text-base">
                 <p className="flex items-center gap-2">
                   <span className="font-semibold">📊 Total Capacity:</span>
                   <span className="font-bold">{event.capacity}</span>
@@ -207,8 +207,8 @@ const EventDetail = () => {
           </div>
 
           {user && canBook && (
-            <div className="border-t-2 border-gray-200 pt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
-              <h3 className="font-bold text-2xl text-gray-900 mb-6 flex items-center gap-2">
+            <div className="border-t-2 border-gray-200 pt-6 md:pt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-xl">
+              <h3 className="font-bold text-xl sm:text-2xl text-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
                 <span>🎫</span> Book Tickets
               </h3>
               
@@ -231,9 +231,9 @@ const EventDetail = () => {
                 </div>
               )}
 
-              <div className="flex flex-col md:flex-row gap-6 items-end">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 items-stretch sm:items-end">
                 <div className="flex-1">
-                  <label className="block text-gray-700 font-semibold mb-2 flex items-center gap-2">
+                  <label className="block text-gray-700 font-semibold mb-2 flex items-center gap-2 text-sm sm:text-base">
                     <span>💺</span> Number of Seats (Max 2)
                   </label>
                   <input
@@ -242,16 +242,16 @@ const EventDetail = () => {
                     max="2"
                     value={seats}
                     onChange={(e) => setSeats(parseInt(e.target.value) || 1)}
-                    className="w-full md:w-32 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-bold text-lg text-center"
+                    className="w-full sm:w-32 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-bold text-base sm:text-lg text-center"
                   />
                 </div>
-                <div>
+                <div className="w-full sm:w-auto">
                   <button
                     onClick={handleBooking}
                     disabled={seats > availableSeats || seats < 1 || seats > 2}
-                    className="btn-primary px-10 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-primary w-full sm:w-auto px-6 sm:px-10 py-3 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                   >
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center justify-center gap-2">
                       <span>✨</span> Book Now
                     </span>
                   </button>
