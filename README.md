@@ -272,4 +272,4 @@ This project is created as an assignment for Koders.
 
 ## Contact
 
-For questions or issues, please contact: info@koders.in
+For questions or issues, please contact: uttarakhandtechnology@gmail.com
