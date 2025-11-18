@@ -127,7 +127,7 @@ cp .env.example .env
 4. Update the `.env` file with your configuration:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/eventease
+MONGODB_URI=mongodb://localhost:27017/**yourdbname**
 JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
 JWT_EXPIRE=7d
 ```
