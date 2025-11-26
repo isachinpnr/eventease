@@ -41,3 +41,5 @@ Thumbs.db
 # Build outputs
 build
 *.map
+**/node_modules
+.env
