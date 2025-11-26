@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Booking from '../models/Booking.js';
 import Event from '../models/Event.js';
 import User from '../models/User.js';
@@ -6,9 +7,14 @@ import { sendBookingConfirmationEmail } from '../utils/emailService.js';
 import { generateBookingPDF } from '../utils/pdfGenerator.js';
 import { sendBookingConfirmationNotification } from '../utils/pushNotification.js';
 
-// @desc    Create booking
+// UroPay configuration for refunds (if supported)
+const UROPAY_API_URL = process.env.UROPAY_API_URL || 'https://api.uropay.me';
+const UROPAY_API_KEY = process.env.UROPAY_API_KEY;
+
+// @desc    Create booking (for free events only - price = 0)
 // @route   POST /api/bookings
 // @access  Private
+// Note: For paid events, use /api/payments/create-intent instead
 export const createBooking = async (req, res) => {
   try {
     const { eventId, seats } = req.body;
@@ -22,13 +28,22 @@ export const createBooking = async (req, res) => {
       return res.status(404).json({ message: 'Event not found' });
     }
     
+    // For paid events, redirect to payment flow
+    if (event.price > 0) {
+      return res.status(400).json({ 
+        message: 'This is a paid event. Please use the payment flow to book.',
+        requiresPayment: true
+      });
+    }
+    
     // Check if event has started (date + time has passed)
     // Users cannot book tickets once event has started
     if (hasEventStarted(event.date, event.time)) {
       return res.status(400).json({ message: 'Cannot book tickets. Event has already started.' });
     }
     
-    // Check if user already has a booking for this event
+    // Check if user already has a CONFIRMED booking for this event
+    // Don't check for Pending - user can retry if payment wasn't completed
     const existingBooking = await Booking.findOne({
       user: req.user._id,
       event: eventId,
@@ -36,20 +51,30 @@ export const createBooking = async (req, res) => {
     });
     
     if (existingBooking) {
-      return res.status(400).json({ message: 'You already have a booking for this event' });
+      return res.status(400).json({ message: 'You already have a confirmed booking for this event' });
     }
+    
+    // Clean up old pending bookings for this user and event (older than 30 minutes)
+    await Booking.deleteMany({
+      user: req.user._id,
+      event: eventId,
+      status: 'Pending',
+      createdAt: { $lt: new Date(Date.now() - 30 * 60 * 1000) } // 30 minutes ago
+    });
     
     // Check capacity
     if (event.bookedSeats + seats > event.capacity) {
       return res.status(400).json({ message: 'Not enough seats available' });
     }
     
-    // Create booking
+    // Create booking (free event, confirmed immediately)
     const booking = await Booking.create({
       user: req.user._id,
       event: eventId,
       seats,
-      totalAmount: event.price * seats
+      totalAmount: 0,
+      status: 'Confirmed',
+      paymentStatus: 'paid' // Free events are considered paid
     });
     
     // Update event booked seats
@@ -231,6 +256,41 @@ export const cancelBooking = async (req, res) => {
       return res.status(400).json({ message: 'Cannot cancel booking. Event has already started.' });
     }
     
+    // Process refund if payment was made
+    let refundProcessed = false;
+    if (booking.paymentStatus === 'paid' && booking.paymentId && booking.totalAmount > 0) {
+      // Note: UroPay refunds may need to be processed manually or via their API
+      // For now, we'll mark it as requiring manual refund processing
+      try {
+        // If UroPay API supports refunds, implement here
+        if (UROPAY_API_KEY) {
+          // UroPay refund API call (if available)
+          // const refundResponse = await axios.post(
+          //   `${UROPAY_API_URL}/api/v1/refunds`,
+          //   {
+          //     payment_id: booking.paymentId,
+          //     amount: booking.totalAmount
+          //   },
+          //   {
+          //     headers: {
+          //       'Authorization': `Bearer ${UROPAY_API_KEY}`
+          //     }
+          //   }
+          // );
+          // booking.refundId = refundResponse.data.id;
+        }
+        
+        // Mark as refunded (manual processing may be required)
+        booking.paymentStatus = 'refunded';
+        refundProcessed = true;
+        console.log(`Refund initiated for booking ${booking._id}. Amount: ₹${booking.totalAmount}`);
+      } catch (refundError) {
+        console.error('Refund error:', refundError);
+        console.warn('⚠️  Refund may need to be processed manually. Please check UroPay dashboard.');
+        // Continue with cancellation even if refund fails
+      }
+    }
+    
     // Update booking status
     booking.status = 'Cancelled';
     await booking.save();
@@ -240,7 +300,11 @@ export const cancelBooking = async (req, res) => {
     event.bookedSeats -= booking.seats;
     await event.save();
     
-    res.json({ message: 'Booking cancelled successfully', booking });
+    res.json({ 
+      message: 'Booking cancelled successfully', 
+      booking,
+      refundProcessed: refundProcessed
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

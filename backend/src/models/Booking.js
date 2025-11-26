@@ -23,12 +23,30 @@ const bookingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Confirmed', 'Cancelled'],
-    default: 'Confirmed'
+    enum: ['Pending', 'Confirmed', 'Cancelled', 'Failed'],
+    default: 'Pending'
   },
   totalAmount: {
     type: Number,
     default: 0
+  },
+  // Payment fields
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'paid', 'failed', 'refunded'],
+    default: 'pending'
+  },
+  paymentId: {
+    type: String, // Stripe payment intent ID
+    default: null
+  },
+  paymentIntentId: {
+    type: String, // Stripe payment intent ID
+    default: null
+  },
+  refundId: {
+    type: String, // Stripe refund ID
+    default: null
   }
 }, {
   timestamps: true
@@ -36,6 +54,7 @@ const bookingSchema = new mongoose.Schema({
 
 // Index for efficient queries
 bookingSchema.index({ user: 1, event: 1 });
+bookingSchema.index({ paymentIntentId: 1 });
 // Note: Duplicate booking prevention is handled in the controller
 
 const Booking = mongoose.model('Booking', bookingSchema);

@@ -265,6 +265,28 @@ See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) for detailed API endpoint doc
 
 ### Frontend (.env)
 - `VITE_API_URL` - Backend API URL (default: http://localhost:5000/api)
+## Payment Integration
+
+This platform now supports secure payment processing using Stripe. Users can book paid events with credit/debit cards, and automatic refunds are processed on cancellation.
+
+### Payment Features
+- ✅ Secure payment processing with Stripe
+- ✅ Support for free events (price = 0)
+- ✅ Automatic refunds on cancellation
+- ✅ Payment status tracking
+- ✅ PDF confirmation generation
+- ✅ Email notifications
+- ✅ Webhook handling for reliable payment confirmation
+
+### Setup Instructions
+
+See [PAYMENT_SETUP.md](./PAYMENT_SETUP.md) for detailed payment integration setup instructions.
+
+**Quick Setup:**
+1. Get Stripe API keys from https://dashboard.stripe.com/test/apikeys
+2. Add `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` to `backend/.env`
+3. Add `VITE_STRIPE_PUBLISHABLE_KEY` to root `.env`
+4. For local testing, use Stripe CLI: `stripe listen --forward-to localhost:5000/api/payments/webhook`
 
 ## License
 

@@ -36,5 +36,28 @@ api.interceptors.response.use(
   }
 );
 
+// UroPay payment functions
+export const createUroPayPayment = async (eventId, seats) => {
+  const response = await api.post('/payments/create-payment', {
+    eventId,
+    seats
+  });
+  return response.data;
+};
+
+export const verifyUroPayPayment = async (bookingData, transactionId, paymentLinkId = null) => {
+  const response = await api.post('/payments/verify', {
+    bookingData,
+    transactionId,
+    paymentLinkId
+  });
+  return response.data;
+};
+
+export const getPaymentStatus = async (bookingId) => {
+  const response = await api.get(`/payments/status/${bookingId}`);
+  return response.data;
+};
+
 export default api;
 

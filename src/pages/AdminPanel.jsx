@@ -107,8 +107,11 @@ const AdminPanel = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mb-4"></div>
+          <p className="text-gray-600 text-lg font-medium">Loading admin panel...</p>
+        </div>
       </div>
     );
   }
@@ -141,14 +144,25 @@ const AdminPanel = () => {
             }}
             className="btn-primary flex items-center gap-2"
           >
-            <span>➕</span> Create Event
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            Create Event
           </button>
         </div>
 
         {showForm && (
           <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8 border border-gray-100">
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-4xl">{editingEvent ? '✏️' : '➕'}</span>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {editingEvent ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  )}
+                </svg>
+              </div>
               <h2 className="text-3xl font-extrabold text-gray-900">
                 {editingEvent ? 'Edit Event' : 'Create New Event'}
               </h2>
@@ -298,7 +312,13 @@ const AdminPanel = () => {
                   className="btn-primary"
                 >
                   <span className="flex items-center gap-2">
-                    <span>{editingEvent ? '💾' : '✨'}</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      {editingEvent ? (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      ) : (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      )}
+                    </svg>
                     {editingEvent ? 'Update Event' : 'Create Event'}
                   </span>
                 </button>
@@ -319,8 +339,11 @@ const AdminPanel = () => {
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 md:p-6">
-            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-              <span>📋</span> All Events
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              All Events
             </h2>
             <p className="text-blue-100 mt-1 text-sm md:text-base">Manage and monitor all your events</p>
           </div>
