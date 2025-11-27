@@ -27,7 +27,7 @@ export const bookingLogger = (req, res, next) => {
           console.log(JSON.stringify(logEntry, null, 2));
           console.log('======================');
         }
-      } catch (error) {
+      } catch {
         // If parsing fails, just continue
       }
     }

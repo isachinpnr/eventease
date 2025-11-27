@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import api, { createUroPayPayment, verifyUroPayPayment } from '../services/api';
+import api, { createUroPayPayment } from '../services/api';
 import { formatDate } from '../utils/formatDate';
 import { useAuth } from '../context/AuthContext';
 import { hasEventStarted } from '../utils/eventDateTime';
@@ -18,11 +18,7 @@ const EventDetail = () => {
   const [showPayment, setShowPayment] = useState(false);
   const [paymentData, setPaymentData] = useState(null);
 
-  useEffect(() => {
-    fetchEvent();
-  }, [id]);
-
-  const fetchEvent = async () => {
+  const fetchEvent = useCallback(async () => {
     try {
       const res = await api.get(`/events/${id}`);
       setEvent(res.data);
@@ -31,7 +27,11 @@ const EventDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchEvent();
+  }, [fetchEvent]);
 
   const handleBooking = async () => {
     if (!user) {
@@ -148,12 +148,6 @@ const EventDetail = () => {
       setError(err.response?.data?.message || 'Payment verification failed');
       setShowPayment(false);
     }
-  };
-
-  const handlePaymentError = (errorMsg) => {
-    setError(errorMsg);
-    setShowPayment(false);
-    setPaymentData(null);
   };
 
   const handlePaymentCancel = () => {

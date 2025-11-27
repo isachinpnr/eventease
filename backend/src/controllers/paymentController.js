@@ -623,6 +623,10 @@ export const checkPaymentStatus = async (req, res) => {
   try {
     const { bookingData, paymentReference, paymentLinkId, amount } = req.body;
     
+    if (paymentReference) {
+      console.log(`🔍 Checking payment status for reference: ${paymentReference}`);
+    }
+    
     if (!bookingData) {
       return res.json({ verified: false, message: 'Invalid booking data' });
     }

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Booking from '../models/Booking.js';
 import Event from '../models/Event.js';
 import User from '../models/User.js';

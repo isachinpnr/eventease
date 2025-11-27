@@ -1,7 +1,6 @@
 import User from '../models/User.js';
 import { generateToken } from '../utils/generateToken.js';
 import { sendRegistrationEmail } from '../utils/emailService.js';
-import { sendRegistrationNotification } from '../utils/pushNotification.js';
 
 // @desc    Register user
 // @route   POST /api/auth/register

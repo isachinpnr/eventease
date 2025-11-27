@@ -77,9 +77,10 @@ export const sendRegistrationNotification = async (subscription, user) => {
 
 // Send booking confirmation notification
 export const sendBookingConfirmationNotification = async (subscription, booking, event, user) => {
+  const userName = user?.name ? `${user.name}, ` : '';
   const payload = {
     title: 'Booking Confirmed! 🎫',
-    body: `Your booking for "${event.title}" is confirmed. ${booking.seats} seat(s) booked.`,
+    body: `${userName}Your booking for "${event.title}" is confirmed. ${booking.seats} seat(s) booked.`,
     icon: '/icon-192x192.png',
     badge: '/badge-72x72.png',
     tag: `booking-${booking._id}`,

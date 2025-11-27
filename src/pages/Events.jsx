@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { formatDate } from '../utils/formatDate';
@@ -15,11 +15,7 @@ const Events = () => {
   });
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchEvents();
-  }, [filters]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
@@ -35,7 +31,11 @@ const Events = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });

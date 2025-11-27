@@ -105,7 +105,6 @@ const SimpleUPIPayment = ({ amount, bookingData, eventTitle, paymentLinkId, paym
     // Priority 3: Fallback to direct UPI QR code
     generateDirectUPIQR.current();
     
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uropayQrCode, paymentUrl, paymentLinkId]); // Re-run if UroPay data changes
 
   // Automatic payment verification polling (Traditional payment app logic)
